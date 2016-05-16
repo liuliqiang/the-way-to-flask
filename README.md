@@ -11,6 +11,6 @@ The Way To Flask
 
 ###联系我
 
-- 主页：liuliqiang.info
+- 主页：https://liuliqiang.info
 - 邮箱：liqianglau@outlook.com
 
