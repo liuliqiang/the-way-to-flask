@@ -7,7 +7,7 @@ The Way To Flask
 
 ###声明
 
-本文非原创，是改编自《[正则表达式30分钟入门教程](http://deerchao.net/tutorials/regex/regex.htm#mission)》，因为原作者的排版个人不是很喜欢，而且内容上个人觉得有些地方需要改进，所以在 gitbook 上开了一本书。
+本文由 [Tyrael](https://liuliqiang.info) 原创，基于 [GNU Free Documentation License V1.33](http://www.gnu.org/licenses/fdl.html) 发布，如有转载、商用等行为，请遵循 Licence ，本人保留一切权利。
 
 ###联系我
 
