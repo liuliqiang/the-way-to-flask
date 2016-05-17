@@ -115,3 +115,102 @@
 
 还有一个问题就是我们因为要做数据的增删改查，所以需要考虑数据的保存，因为数据库的操作在本章又是超出范围的讨论，所以这里我们简单得以文件作为保存数据的媒介。进行数据操作，那么我们的代码可以这么写：
 
+	#!/usr/bin/env python
+	# encoding: utf-8
+	import json
+	from flask import Flask, request, jsonify
+	
+	app = Flask(__name__)
+	
+	
+	@app.route('/', methods=['GET'])
+	def query_records():
+	    name = request.args.get('name')
+	    print name
+	    with open('/tmp/data.txt', 'r') as f:
+	        data = f.read()
+	        records = json.loads(data)
+	        for record in records:
+	            if record['name'] == name:
+	                return jsonify(record)
+	        return jsonify({'error': 'data not found'})
+	
+	
+	@app.route('/', methods=['PUT'])
+	def create_record():
+	    record = json.loads(request.data)
+	    with open('/tmp/data.txt', 'r') as f:
+	        data = f.read()
+	
+	    if not data:
+	        records = [record]
+	    else:
+	        records = json.loads(data)
+	        records.append(record)
+	
+	    with open('/tmp/data.txt', 'w') as f:
+	        f.write(json.dumps(records, indent=2))
+	    return jsonify(record)
+	
+	
+	@app.route('/', methods=['POST'])
+	def update_record():
+	    record = json.loads(request.data)
+	    new_records = []
+	    with open('/tmp/data.txt', 'r') as f:
+	        data = f.read()
+	        records = json.loads(data)
+	
+	    for r in records:
+	        if r['name'] == record['name']:
+	            r['email'] = record['email']
+	        new_records.append(r)
+	
+	    with open('/tmp/data.txt', 'w') as f:
+	        f.write(json.dumps(new_records, indent=2))
+	    return jsonify(record)
+	
+	
+	@app.route('/', methods=['DELETE'])
+	def delte_record():
+	    record = json.loads(request.data)
+	    new_records = []
+	    with open('/tmp/data.txt', 'r') as f:
+	        data = f.read()
+	        records = json.loads(data)
+	        for r in records:
+	            if r['name'] == record['name']:
+	                continue
+	            new_records.append(r)
+	
+	    with open('/tmp/data.txt', 'w') as f:
+	        f.write(json.dumps(new_records, indent=2))
+	
+	    return jsonify(record)
+	
+	app.run(debug=True)
+
+这段代码虽然很长，但是代码都比较容易懂，而且都是比较简单的文件操作。
+
+这段代码我们需要关注的点有以下几点：
+
+- 如何设置请求方法
+
+	@app.route('/', methods=['GET'])
+	@app.route('/', methods=['PUT'])
+	@app.route('/', methods=['POST'])
+	@app.route('/', methods=['DELETE'])
+
+- 如何获取数据
+
+在 Flask 中有一个 request 变量，这是一个请求上下文的变量，然后里面包含多个属性是可以用来获取请求的参数的，例如我们这里用到了两种方式：
+
+1. request.args.get('name')
+
+	request.args 这个属性用于表示 GET 请求在 URL 上附带的参数
+
+2. json.loads(request.data)
+
+	request.data 这个属性用于表示 POST 等请求的请求体中的数据
+
+我们目前对 request 变量就做这么多介绍吧，毕竟我们本章的目标是让大家了解如何处理 GET、POST、PUT 等不同的请求方式如何处理。

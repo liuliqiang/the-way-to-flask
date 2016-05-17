@@ -20,12 +20,19 @@
 
 ### 数据库
 
-	mariadb： 10.0.22-MariaDB-1~jessie mariadb.org binary distribution
-	redis：3.0.5
+	MongoDB：
+		version：3.2.6
+		ip：localhost
+		port：27017
+	Redis：
+		version：3.0.5
+		ip：
+		port：
 	
 ### Python 依赖库
 
 	Flask==0.10.1
+	flask-mongoengine==0.7.5
 	Flask-Admin==1.4.0
 	Flask-Redis==0.1.0
 	Flask-WTF==0.12
