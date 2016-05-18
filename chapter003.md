@@ -196,10 +196,10 @@
 
 - 如何设置请求方法
 
-	@app.route('/', methods=['GET'])
-	@app.route('/', methods=['PUT'])
-	@app.route('/', methods=['POST'])
-	@app.route('/', methods=['DELETE'])
+		@app.route('/', methods=['GET'])
+		@app.route('/', methods=['PUT'])
+		@app.route('/', methods=['POST'])
+		@app.route('/', methods=['DELETE'])
 
 - 如何获取数据
 
@@ -207,10 +207,11 @@
 
 1. request.args.get('name')
 
-	request.args 这个属性用于表示 GET 请求在 URL 上附带的参数
+	`request.args` 这个属性用于表示 GET 请求在 URL 上附带的参数
 
 2. json.loads(request.data)
 
-	request.data 这个属性用于表示 POST 等请求的请求体中的数据
+	`request.data` 这个属性用于表示 POST 等请求的请求体中的数据
 
 我们目前对 request 变量就做这么多介绍吧，毕竟我们本章的目标是让大家了解如何处理 GET、POST、PUT 等不同的请求方式如何处理。
+
