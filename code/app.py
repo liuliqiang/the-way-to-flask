@@ -2,7 +2,9 @@
 # encoding: utf-8
 import json
 from flask import Flask, request, jsonify
-from flask.ext.login import LoginManager, login_user
+from flask.ext.login import (current_user, LoginManager,
+                             login_user, logout_user,
+                             login_required)
 from flask_mongoengine import MongoEngine
 
 
@@ -12,6 +14,7 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'localhost',
     'port': 27017
 }
+app.secret_key = 'youdontknowme'
 
 db = MongoEngine()
 login_manager = LoginManager()
@@ -20,6 +23,11 @@ login_manager.init_app(app)
 
 
 login_manager.login_view = 'login'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.objects(id=user_id).first()
 
 
 @app.route('/login', methods=['POST'])
@@ -38,6 +46,24 @@ def login():
                         "reason": "Username or Password Error"})
 
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    logout_user()
+    return jsonify(**{'result': 200,
+                      'data': {'message': 'logout success'}})
+
+
+@app.route('/user_info', methods=['POST'])
+def user_info():
+    if current_user.is_authenticated:
+        resp = {"result": 200,
+                "data": current_user.to_json()}
+    else:
+        resp = {"result": 401,
+                "data": {"message": "user no login"}}
+    return jsonify(**resp)
+
+
 class User(db.Document):
     name = db.StringField()
     password = db.StringField()
@@ -50,14 +76,14 @@ class User(db.Document):
     def is_authenticated(self):
         return True
 
-    def is_actice(self):
+    def is_active(self):
         return True
 
     def is_anonymous(self):
         return False
 
     def get_id(self):
-        return self.id
+        return str(self.id)
 
 
 @app.route('/', methods=['GET'])
@@ -72,6 +98,7 @@ def query_records():
 
 
 @app.route('/', methods=['PUT'])
+@login_required
 def create_record():
     record = json.loads(request.data)
     user = User(name=record['name'],
@@ -82,6 +109,7 @@ def create_record():
 
 
 @app.route('/', methods=['POST'])
+@login_required
 def update_record():
     record = json.loads(request.data)
     user = User.objects(name=record['name']).first()
@@ -94,6 +122,7 @@ def update_record():
 
 
 @app.route('/', methods=['DELETE'])
+@login_required
 def delte_record():
     record = json.loads(request.data)
     user = User.objects(name=record['name']).first()
