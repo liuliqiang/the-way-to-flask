@@ -13,4 +13,5 @@ The Way To Flask
 
 - 主页：https://liuliqiang.info
 - 邮箱：liqianglau@outlook.com
+- Gitbook: https://luke0922.gitbooks.io/the-way-to-flask/content/
 
