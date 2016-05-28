@@ -2,9 +2,8 @@
 import os
 
 
-def load_config():
+def load_config(mode=os.environ.get('MODE')):
     """Load config."""
-    mode = os.environ.get('MODE')
     try:
         if mode == 'PRODUCTION':
             from .production import ProductionConfig

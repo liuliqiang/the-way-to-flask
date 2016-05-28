@@ -1,12 +1,6 @@
-# coding: utf-8
+#!/usr/bin/env python
+# encoding: utf-8
 import sys
-import os
-
-# Insert project root path to sys.path
-project_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-if project_path not in sys.path:
-    sys.path.insert(0, project_path)
-
 import logging
 from flask import Flask
 from flask_wtf.csrf import CsrfProtect
@@ -23,10 +17,9 @@ except (AttributeError, NameError):
     pass
 
 
-def create_app():
+def create_app(mode):
     """Create Flask app."""
-    config = load_config()
-    print config
+    config = load_config(mode)
 
     app = Flask(__name__)
     app.config.from_object(config)
