@@ -3,7 +3,6 @@ import os
 
 
 def load_config(mode=os.environ.get('MODE')):
-    print mode
     """Load config."""
     try:
         if mode == 'PRODUCTION':
