@@ -11,4 +11,3 @@ class TestingConfig(Config):
 
     # Db config
     SQLALCHEMY_DATABASE_URI = "sqlite:///%s/db/testing.sqlite3" % Config.PROJECT_PATH
-

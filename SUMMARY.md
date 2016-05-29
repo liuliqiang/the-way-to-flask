@@ -10,9 +10,13 @@
     * [注册登录](chapter005.md)
     * [权限控制](chapter006.md)
     * [更好得维护代码](chapter007.md)
-    * [管理数据库数据](chapter008.md)
+    * [配置管理](chapter008.md)
+    * [启动应用](chapter009.md)
+    * [管理数据库数据](chapter010.md) 
 * [第三部分](part003.md)
     * [TODO](chapter009.md)
     * [TODO](chapter010.md)
     * [TODO](chapter011.md)
     * [TODO](chapter012.md)
+
+

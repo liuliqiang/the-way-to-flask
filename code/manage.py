@@ -1,18 +1,13 @@
-# coding: utf-8
-from flask.ext.script import Manager
+#!/usr/bin/env python
+# encoding: utf-8
+from flask_script import Manager
+from flask_script.commands import ShowUrls
 from application import create_app
 
-# Used by app debug & livereload
-PORT = 8080
+manager = Manager(create_app)
+manager.add_option('-c', '--config', dest='mode', required=False)
 
-app = create_app()
-manager = Manager(app)
-
-
-@manager.command
-def run():
-    """Run app."""
-    app.run(port=PORT)
+manager.add_command("showurls", ShowUrls())
 
 
 if __name__ == "__main__":
