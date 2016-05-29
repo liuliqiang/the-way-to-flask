@@ -19,6 +19,6 @@ class DevelopmentConfig(object):
     # MongoEngine config
     MONGODB_SETTINGS = {
         'db': 'the_way_to_flask',
-        'host': 'localhost',
-        'port': 27017
+        'host': '192.168.59.103',
+        'port': 32768
     }

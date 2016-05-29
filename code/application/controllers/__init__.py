@@ -8,7 +8,7 @@ from flask.ext.login import current_user, login_user, logout_user
 from application.models import User
 
 
-user_bp = Blueprint('user', __name__, url_prefix='')
+user_bp = Blueprint('users', __name__, url_prefix='')
 
 
 @user_bp.route('/login', methods=['POST'])

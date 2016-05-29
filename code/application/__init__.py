@@ -2,11 +2,14 @@
 # encoding: utf-8
 import sys
 import logging
+
 from flask import Flask
 from flask_wtf.csrf import CsrfProtect
+from flask_admin.contrib.mongoengine import ModelView
+
 from config import load_config
-from application.extensions import db, login_manager
-from application.models import User
+from application.extensions import db, login_manager, admin
+from application.models import User, Role
 from application.controllers import user_bp
 
 # convert python's encoding to utf8
@@ -46,6 +49,11 @@ def register_extensions(app):
     """Register models."""
     db.init_app(app)
     login_manager.init_app(app)
+
+    # flask-admin configs
+    admin.init_app(app)
+    admin.add_view(ModelView(User))
+    admin.add_view(ModelView(Role))
 
     login_manager.login_view = 'login'
 
