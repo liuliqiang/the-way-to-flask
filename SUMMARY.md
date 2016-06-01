@@ -14,9 +14,8 @@
     * [启动应用](chapter009.md)
     * [管理数据库数据](chapter010.md) 
 * [第三部分](part003.md)
-    * [TODO](chapter009.md)
-    * [TODO](chapter010.md)
-    * [TODO](chapter011.md)
-    * [TODO](chapter012.md)
+    * [编写 TODO 应用【part001】](chapter011.md)
+    * [编写 TODO 应用【part002】](chapter012.md)
+    * [使用 Gunicorn 和 Nginx 部署项目](chapter013.md)
 
 
