@@ -20,5 +20,5 @@ class DevelopmentConfig(object):
     MONGODB_SETTINGS = {
         'db': 'the_way_to_flask',
         'host': '192.168.59.103',
-        'port': 32768
+        'port': 27017
     }

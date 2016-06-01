@@ -4,13 +4,12 @@ import sys
 import logging
 
 from flask import Flask
-from flask_wtf.csrf import CsrfProtect
 from flask_admin.contrib.mongoengine import ModelView
 
 from config import load_config
 from application.extensions import db, login_manager, admin
 from application.models import User, Role
-from application.controllers import user_bp
+from application.controllers import all_bp
 
 # convert python's encoding to utf8
 try:
@@ -29,9 +28,6 @@ def create_app(mode):
 
     if not hasattr(app, 'production'):
         app.production = not app.debug and not app.testing
-
-    # CSRF protect
-    CsrfProtect(app)
 
     if app.debug or app.testing:
         # Log errors to stderr in production mode
@@ -55,7 +51,7 @@ def register_extensions(app):
     admin.add_view(ModelView(User))
     admin.add_view(ModelView(Role))
 
-    login_manager.login_view = 'login'
+    login_manager.login_view = 'auth.login'
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -63,4 +59,5 @@ def register_extensions(app):
 
 
 def register_blueprint(app):
-    app.register_blueprint(user_bp)
+    for bp in all_bp:
+        app.register_blueprint(bp)
