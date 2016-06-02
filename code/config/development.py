@@ -1,8 +1,10 @@
 # coding: utf-8
 import os
 
+from .default import Config
 
-class DevelopmentConfig(object):
+
+class DevelopmentConfig(Config):
     """Base config class."""
     # Flask app config
     DEBUG = False
@@ -20,5 +22,5 @@ class DevelopmentConfig(object):
     MONGODB_SETTINGS = {
         'db': 'the_way_to_flask',
         'host': '192.168.59.103',
-        'port': 32768
+        'port': 27017
     }

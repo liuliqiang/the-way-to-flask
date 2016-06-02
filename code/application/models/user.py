@@ -17,12 +17,25 @@ class Role(db.Document):
     name = db.StringField()
     permission = db.IntField()
 
+    def __repr__(self):
+        return "{}-{}".format(self.name, self.permission)
+
+    def __str__(self):
+        return self.__repr__()
+
+    def __unicode__(self):
+        return self.__repr__()
+
 
 class User(db.Document):
     name = db.StringField()
     password = db.StringField()
     email = db.StringField()
     role = db.ReferenceField('Role')
+
+    @property
+    def id(self):
+        return str(self._id)
 
     def to_json(self):
         return {"name": self.name,
