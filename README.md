@@ -28,3 +28,13 @@ Flask 是 Python 编程语言的一种 Web 框架，核心的思想就是自身�
 - Gitbook: https://luke0922.gitbooks.io/the-way-to-flask/content/
 - GitHub: https://github.com/luke0922/the-way-to-flask.git
 
+### 更新记录
+
+## Version 1.0
+
+- date： 2016-6-2
+- desc： 终于在一个多月的时间里完成了第一版，期间发生了很多事情，但是，还是坚持下来了，完成了第一版的《The Way To Flask》，虽然个人觉得还有很大的改进空间，但至少是有这么粗糙的一版，后面有什么问题，可以根据大家的建议进行改进。
+
+## Version 1.1
+- date: 2016-6-11
+- desc: 在 Pycon2016 上观看了《Flask at Scale》的讲解，对 Flask 的项目有了更多的一些理解，发现了 V1.0 的内容已经符合可维护性的要求，在这个版本中新加入优化性能的部分。
