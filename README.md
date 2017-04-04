@@ -17,7 +17,7 @@ Flask 是一个使用 Python 编写的轻量级 Web 应用框架，核心的思�
 
 ### 声明
 
-本文由 [Tyrael](https://liuliqiang.info) 编写，使用 [GNU FDL v1.3 Licence](http://www.gnu.org/licenses/fdl-1.3.html) 发布，如有转载、商业使用等用途，请在 Licence 的约束下进行，本人保留一切权利。
+本文由 [Yetship](https://liuliqiang.info) 编写，使用 [GNU FDL v1.3 Licence](http://www.gnu.org/licenses/fdl-1.3.html) 发布，如有转载、商业使用等用途，请在 Licence 的约束下进行，本人保留一切权利。
 
 ### 联系我
 
@@ -38,3 +38,9 @@ Flask 是一个使用 Python 编写的轻量级 Web 应用框架，核心的思�
 ## Version 1.1
 - date: 2016-6-11
 - desc: 在 Pycon2016 上观看了《Flask at Scale》的讲解，对 Flask 的项目有了更多的一些理解，发现了 V1.0 的内容已经符合可维护性的要求，在这个版本中新加入优化性能的部分。
+
+## Version 1.2
+- begin: 2017-03-01
+- end: 
+- desc：修改一些文档的错误
+
