@@ -1,6 +1,6 @@
 # Summary
 
-* [前言](README.md)
+* [前言](index.md)
 * [第一部分](part001.md)
     * [本书概述](chapter001.md)
     * [简单的 Flask 应用](chapter002.md)

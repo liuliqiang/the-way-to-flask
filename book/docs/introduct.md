@@ -25,7 +25,7 @@ Flask 是一个使用 Python 编写的轻量级 Web 应用框架，核心的思�
 
 - 主页：https://liuliqiang.info
 - 邮箱：liqianglau@outlook.com
-- HomePage: http://www.liuliqiang.info/book/
+- Gitbook: https://luke0922.gitbooks.io/the-way-to-flask/content/
 - GitHub: https://github.com/luke0922/the-way-to-flask.git
 
 ### 更新记录
