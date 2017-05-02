@@ -1,13 +1,25 @@
 # coding: utf-8
+import os
+
 from .default import Config
 
 
 class TestingConfig(Config):
-    # App config
+    # Flask app config
+    DEBUG = False
     TESTING = True
+    SECRET_KEY = "sample_key"
 
-    # Disable csrf while testing
-    WTF_CSRF_ENABLED = False
+    # Root path of project
+    PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-    # Db config
-    SQLALCHEMY_DATABASE_URI = "sqlite:///%s/db/testing.sqlite3" % Config.PROJECT_PATH
+    # Site domain
+    SITE_TITLE = "twtf"
+    SITE_DOMAIN = "http://localhost:8080"
+
+    # MongoEngine config
+    MONGODB_SETTINGS = {
+        'db': 'the_way_to_flask_test',
+        'host': '192.168.59.103',
+        'port': 27017
+    }

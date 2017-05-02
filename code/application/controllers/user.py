@@ -1,18 +1,15 @@
 #!/usr/bin/env python
 # encoding: utf-8
-from flask.ext.login import current_user
 from flask import Blueprint, jsonify
+from flask_jwt import jwt_required, current_identity
 
 
 user_bp = Blueprint('users', __name__, url_prefix='')
 
 
 @user_bp.route('/user_info', methods=['POST'])
+@jwt_required()
 def user_info():
-    if current_user.is_authenticated:
-        resp = {"result": 200,
-                "data": current_user.to_json()}
-    else:
-        resp = {"result": 401,
-                "data": {"message": "user no login"}}
+    resp = {"result": 200,
+            "data": current_identity.to_json()}
     return jsonify(**resp)
