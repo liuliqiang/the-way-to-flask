@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>简单的 Flask 应用 - The Way to Flask</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u7b80\u5355\u7684 Flask \u5e94\u7528";
+    var mkdocs_page_input_path = "chapter002.md";
+    var mkdocs_page_url = "/chapter002/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../SUMMARY/" class="icon icon-home"> The Way to Flask</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../SUMMARY/">目录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part001/">第一部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter001/">本书概述</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">简单的 Flask 应用</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#flask">简单的 Flask 应用</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#simple-flask-app">Simple Flask App</a></li>
+        
+            <li><a class="toctree-l3" href="#_1">简析第一个应用</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter003/">简单的 REST 服务</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part002/">第二部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter004/">集成数据库</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter005/">注册登录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter006/">权限控制</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter007/">更好得维护代码</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter008/">配置管理</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter009/">启动应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter010/">管理数据库数据</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part003/">第三部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter011/">编写 TODO 应用【part1】</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter012/">编写 TODO 应用【part2】</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter013/">使用 Gunicorn 和 Nginx 部署项目</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../SUMMARY/">The Way to Flask</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../SUMMARY/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>简单的 Flask 应用</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="flask">简单的 Flask 应用</h1>
+<p>作为本书的第一个示例，也可能是你接触的第一个 Flask 应用，我还是以程序届常规的 Hello World 为例来编写一个非常简单的例子。</p>
+<p>这个例子的功能就是你在浏览器中输入URL：</p>
+<pre><code>http://localhost:5000
+</code></pre>
+<p>然后，你就可以在浏览器中看到：</p>
+<pre><code>Hello World！
+</code></pre>
+<h2 id="simple-flask-app">Simple Flask App</h2>
+<p>首先，我们先来看一个简短的代码</p>
+<pre><code>#!/usr/bin/env python
+# encoding: utf-8
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return "Hello World!"
+
+app.run()
+</code></pre>
+<p>将这段代码保存为 <code>app.py</code>，然后再使用 python 运行这个文件：</p>
+<pre><code>python app.py
+</code></pre>
+<p>回车之后，你将会看到类似以下的输出：</p>
+<pre><code>* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+</code></pre>
+<p>如果有其它错误，你可以仔细看看是什么问题，代码和我上面是否一致，还有一个很重要的点就是，你是否已经安装了 Flask ，如果没有的话，那么安装一下：</p>
+<pre><code>pip install Flask==0.10.1
+</code></pre>
+<p>安装完成后，继续使用 Python 运行上述文件：</p>
+<pre><code>python app.py
+</code></pre>
+<p>然后在浏览器上打开以下URL：</p>
+<pre><code>http://localhost:5000
+</code></pre>
+<p>你将会看到这个界面：</p>
+<p><img alt="chapter002-001.png" src="../imgs/chapter002-001.png" /></p>
+<p>那就说明你的第一个 Flask 应用已经运行成功了。</p>
+<h2 id="_1">简析第一个应用</h2>
+<p>对于你运行成功的第一个程序很简单，我们就做一些简单的分析，让你有一个简单的了解。</p>
+<p>前两行的编码说明就不说了，这是 Python 的特性，而不是 Flask 特有的，如果读者有不懂的话，建议查看 Python 的文件编码说明。</p>
+<p>然后继续看代码，我们的所有代码只有一个 <code>import</code>，就是 <code>Flask</code>，这是 Flask 这个框架的核心，我们把它认为是服务器就可以了，目前不需要多关注：</p>
+<pre><code>from flask import Flask
+</code></pre>
+<p>然后接下去看，解析来一句是初始化了一个 Flask 变量，那么我们就可以认为是创建了一个服务器；需要注意的是这里传递了一个参数 <strong>name</strong>，我们知道在 Python 中 <strong>name</strong> 这个变量是表示模块的名称，<strong>这个参数对于 Flask 很重要，因为 Flask 会依赖于它去判断从哪里找模板、静态文件</strong>。</p>
+<pre><code>app = Flask(__name__)
+</code></pre>
+<p>接下来三句目前来说可能有点超出我们的讨论范围，但是我们这里稍微讲解一下好了，这三句中关键是第一句和第三句。</p>
+<pre><code>@app.route('/')
+def index():
+    return "Hello World!"
+</code></pre>
+<p>第一句中关键的是 <code>'/'</code> 这个参数，这个参数的作用是说下面的这个函数对应于我们在浏览器中输入的地址：</p>
+<pre><code>http://localhost:5000 + 后面的参数
+</code></pre>
+<p>这样说，大家可能不太明白，假设换成：</p>
+<pre><code>@app.route('/hello')
+def hello():
+    return "hello world"
+</code></pre>
+<p>的话，那么也就表示，我们在浏览器中访问：</p>
+<pre><code>http://localhost:5000/hello
+</code></pre>
+<p>那么 Flask 就会调用到 hello 这个函数。 </p>
+<p>那第三句的意思大家可能会比较容易理解了，没错，return 的内容就是我们在浏览器中看到的内容了。我们的代码中 return 的是 "Hello World！"，那么我们在浏览器中看到的就是 Hello World！</p>
+<p>到目前为止，我们 import 了服务器（<strong>import Flask</strong>）,创建了服务器（<strong><em>Flask(<strong>name</strong>)</em></strong>），是时候将服务器运行起来了，是的，最后一句</p>
+<pre><code>app.run()
+</code></pre>
+<p>就是表示将服务器运行起来，接受浏览器的访问。</p>
+<p>那么整个过程就是这样的，当我们在浏览器中输入</p>
+<pre><code>http://localhost:5000
+</code></pre>
+<p>的时候，其实浏览器默默得在我们的 URL 后面加入了一个 <code>/</code>，真实访问的就是 </p>
+<pre><code>http://localhost:5000/
+</code></pre>
+<p>其实也就是对应着我们的</p>
+<pre><code>app.route('/')
+</code></pre>
+<p>函数了，这个函数</p>
+<pre><code>return "Hello World!"
+</code></pre>
+<p>所以我们在浏览器中就看到了：</p>
+<pre><code>Hello World！
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter003/" class="btn btn-neutral float-right" title="简单的 REST 服务">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../chapter001/" class="btn btn-neutral" title="本书概述"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../chapter001/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../chapter003/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

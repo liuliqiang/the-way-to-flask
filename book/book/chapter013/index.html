@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>使用 Gunicorn 和 Nginx 部署项目 - The Way to Flask</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u4f7f\u7528 Gunicorn \u548c Nginx \u90e8\u7f72\u9879\u76ee";
+    var mkdocs_page_input_path = "chapter013.md";
+    var mkdocs_page_url = "/chapter013/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../SUMMARY/" class="icon icon-home"> The Way to Flask</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../SUMMARY/">目录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part001/">第一部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter001/">本书概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter002/">简单的 Flask 应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter003/">简单的 REST 服务</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part002/">第二部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter004/">集成数据库</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter005/">注册登录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter006/">权限控制</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter007/">更好得维护代码</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter008/">配置管理</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter009/">启动应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter010/">管理数据库数据</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part003/">第三部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter011/">编写 TODO 应用【part1】</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter012/">编写 TODO 应用【part2】</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">使用 Gunicorn 和 Nginx 部署项目</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#gunicorn-nginx-flask">使用 Gunicorn 和 Nginx 部署 Flask 项目</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">安装组件</a></li>
+        
+            <li><a class="toctree-l3" href="#_2">下载代码</a></li>
+        
+            <li><a class="toctree-l3" href="#wsgi">创建 WSGI 切入点</a></li>
+        
+            <li><a class="toctree-l3" href="#systemd-unit-file">常见 systemd Unit File</a></li>
+        
+            <li><a class="toctree-l3" href="#nginx">配置 Nginx</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../SUMMARY/">The Way to Flask</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../SUMMARY/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>使用 Gunicorn 和 Nginx 部署项目</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="gunicorn-nginx-flask">使用 Gunicorn 和 Nginx 部署 Flask 项目</h1>
+<p>在实际的生产环境中，我们很少是直接使用命令：</p>
+<pre><code>python app.py
+</code></pre>
+<p>运行 Flask 应用提供服务的，正常都会集成 WSGI Web服务器提供服务，而在众多的 WSGI Web 服务器中，比较常用的主要有两种，分别是 Gunicorn 和 UWSGI，同时，我们也会使用 Nginx 作为反向代理进行部署应用。</p>
+<p>本文因为需要安装 Nginx，所以文章内的命令和使用的系统相关，但是这样的命令不多，本文使用的 <strong>Ubuntu 16.04</strong>，因此包管理软件是 <strong>apt</strong>，如果使用的 RedHat 系列的话，那完全可以用 <strong>yum</strong> 代替。其他系列的系统可以查找相关文档寻找代替管理工具。</p>
+<h2 id="_1">安装组件</h2>
+<pre><code>sudo apt-get update
+sudo apt-get install python-pip python-dev nginx
+
+pip install gunicorn 
+pip install flask
+</code></pre>
+<p>这里前两句是更新一下软件源，并且保证我们的 pip 和 python 依赖库已经安装上了，同时，别忘了安装反向代理 Nginx。后面两句就是安装我们必备的 Gunicorn 和 Flask Python 库了。</p>
+<h2 id="_2">下载代码</h2>
+<p>因为在我们的前文中已经写了一个代码了，所以这里就继续使用这段代码，使用方式是：</p>
+<pre><code>git clone git@github.com:luke0922/the-way-to-flask.git
+cd the-way-to-flask/code
+pip install -r requirements.txt
+python manage.py runserver
+</code></pre>
+<p>此时，我们的服务器应该是已经运行起来了，但是，默认 Ubuntu 是开启了防火墙屏蔽所有端口访问的，所以我们可能需要打开防火墙端口，在 Ubuntu 16.04 中可以这样做：</p>
+<pre><code>sudo ufw allow 5000
+</code></pre>
+<p>现在，应该可以访问我们的应用了，在命令行上我们敲一下这个命令，访问以下 WEB 服务：</p>
+<pre><code>http://localhost:5000
+</code></pre>
+<p>一切正常的话，</p>
+<h2 id="wsgi">创建 WSGI 切入点</h2>
+<pre><code>vim wsgi.py
+</code></pre>
+<p>里面内容填：</p>
+<pre><code>from myproject import app
+
+if __name__ == "__main__":
+    app.run()
+</code></pre>
+<p>然后使用这个命令运行代码：</p>
+<pre><code>gunicorn --bind 0.0.0.0:5000 wsgi:app
+</code></pre>
+<p>依旧访问这个地址看看：</p>
+<pre><code>http://localhost:5000
+</code></pre>
+<h2 id="systemd-unit-file">常见 systemd Unit File</h2>
+<pre><code>vim /etc/systemd/system/app.service
+</code></pre>
+<p>里面的内容写：</p>
+<pre><code>[Unit]
+Description=Gunicorn instance to serve myproject
+After=network.target
+
+[Service]
+User=www
+Group=www
+WorkingDirectory=/home/www/myproject
+Environment="PATH=/home/www/myproject/myprojectenv/bin"
+ExecStart=/home/www/myproject/myprojectenv/bin/gunicorn --workers 3 --bind unix:myproject.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>保存退出，然后尝试一下命令：</p>
+<pre><code>sudo systemctl start app
+sudo systemctl enable app
+</code></pre>
+<h2 id="nginx">配置 Nginx</h2>
+<p>配置Nginx</p>
+<pre><code>sudo nano /etc/nginx/sites-available/myproject
+</code></pre>
+<p>里面写：</p>
+<pre><code>server {
+    listen 80;
+    server_name server_domain_or_IP;
+
+     location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/sammy/myproject/myproject.sock;
+    }
+}
+</code></pre>
+<p>保存之后，用 nginx 自带工具验证一遍</p>
+<pre><code>nginx -t
+</code></pre>
+<p>如果ok的话然后让 nginx 重新加载配置</p>
+<pre><code>nginx -s reload
+</code></pre>
+<p>关闭服务器端口：</p>
+<ul>
+<li>sudo ufw delete allow 5000</li>
+<li>sudo ufw allow 'Nginx Full'</li>
+</ul>
+<p>此时访问服务器试试：</p>
+<pre><code>http://192.168.59.103
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../chapter012/" class="btn btn-neutral" title="编写 TODO 应用【part2】"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../chapter012/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

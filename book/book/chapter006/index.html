@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>权限控制 - The Way to Flask</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u6743\u9650\u63a7\u5236";
+    var mkdocs_page_input_path = "chapter006.md";
+    var mkdocs_page_url = "/chapter006/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../SUMMARY/" class="icon icon-home"> The Way to Flask</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../SUMMARY/">目录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part001/">第一部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter001/">本书概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter002/">简单的 Flask 应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter003/">简单的 REST 服务</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part002/">第二部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter004/">集成数据库</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter005/">注册登录</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">权限控制</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#_1">自建装饰器实现权限控制</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_2">权限控制设计</a></li>
+        
+            <li><a class="toctree-l3" href="#role-model">创建 Role Model</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">权限控制</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter007/">更好得维护代码</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter008/">配置管理</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter009/">启动应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter010/">管理数据库数据</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part003/">第三部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter011/">编写 TODO 应用【part1】</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter012/">编写 TODO 应用【part2】</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter013/">使用 Gunicorn 和 Nginx 部署项目</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../SUMMARY/">The Way to Flask</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../SUMMARY/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>权限控制</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="_1">自建装饰器实现权限控制</h1>
+<p>在上一章 <a href="../chapter005/">《登陆注册》</a>中，我们为 REST 的 API 设置了新增、更新和删除的操作需要登陆才能完成。细想一下，这样未免太过草率，因为对于一个系统来说，用户肯定是分为不同的级别的，例如普通的用户也就只能查查数据，然后一些用户还能多一个增加数据的权限，再高级一点的还能修改数据，最高级的就是增删改查都能。</p>
+<p>对于这些更加丰富的需求，我们目前的登陆可用明显还不能满足需求，因此，按常规本章应该会引入一个新的扩展，而 Flask 确实是有一款叫做 <code>Flask-Principal</code>，的扩展可以满足我们的需求，通过这个扩展，我们希望能够达到更细粒度得控制用户的权限。但是，我<strong>嫌弃这个扩展太累赘</strong>了，所以本章不准备使用这个扩展，而是自己编写一个权限控制的扩展进行权限的控制。</p>
+<h2 id="_2">权限控制设计</h2>
+<p>我们这里的权限控制采用 <a href="https://en.wikipedia.org/wiki/Role-based_access_control">RBAC</a> 的方式，首先，我们会创建一个 Role 的 Model，然后给每个 User 分配一个 Role，这样的话，我们就可以限制某个操作需要某种 Role 才能执行，这样的话就实现了更细粒度的权限控制。</p>
+<p>这里还有个实现细节需要先说明一下，我们的 Role 的权限是以二进制位来表示的，每一个二进制位表示一种权限：</p>
+<ul>
+<li>第一位表示可以读取记录</li>
+<li>第二位表示可以新建记录</li>
+<li>第三位表示可以更新记录</li>
+<li>第四位表示可以删除记录</li>
+</ul>
+<p>这样的话，如果一个用户只能读取记录，那么他对应的 Role 的权限应该是 <strong>0000 0001b</strong> ，换算成十六进制的话就是： 0x01</p>
+<p>如果一个用户所有操作都可以执行，那么它的权限应该对应于 <strong>0000 1111b</strong>，换算成十六进制的话就是：0x0f </p>
+<p>那么，假如我们要判断一个用户时候可以进行新建操作，那么应该怎么实现这个逻辑？我这里的实现机制是如果是只有新建操作，那么对应的权限就是：<strong>0000 0010b</strong>，那如果我要判断一个用户时候有新建的权限，那么我只需要对这个<strong>用户的权限</strong>和这个操作所<strong>需要的权限</strong>进行 <strong>and 操作</strong>，如果得到的结果等于需要的权限的话，那么就表示该用户拥有权限，可能说得有点复杂，上一个简单的例子</p>
+<pre><code>用户 A 的权限：      0000 0001b      只有读取记录的权限
+用户 B 的权限：      0000 1111b      拥有所有权限
+新建记录需要权限：    0000 0010b      需要新建权限
+用户A是否可以新建：   0000 0001b and 0000 0010b = 0000 0000b ！= 新建权限，所以不能新建
+用户B时候可以新建：   0000 1111b and 0000 0010b = 0000 0010b  == 新建权限，所以可以新建
+</code></pre>
+<p>大概就是这样一个场景，大家可以自己动手演练演练，看下是否可行。</p>
+<h2 id="role-model">创建 Role Model</h2>
+<p>之前已经在 <a href="../chapter004/">《集成数据库》</a> 章节中讲解过了如何创建 Model，所以这里直接根据之前的经验创建 Role Model，然后再往 User 中加上一个 Role 字段。</p>
+<pre><code>class Permission:
+    READ = 0x01  
+    CREATE = 0x02
+    UPDATE = 0x04     
+    DELETE = 0x08
+    DEFAULT = READ
+
+class Role(db.Document):
+    name = db.StringField()
+    permission = db.IntField()
+
+class User(db.Document):
+    name = db.StringField()
+    password = db.StringField()
+    email = db.StringField()
+    role = db.ReferenceField('Role'， default=DEFAULT_ROLE)
+</code></pre>
+<p>这里就简单得创建了一个 Role 的 Model，而 Role 只有一个名称，用于标示这个角色，另外一个就是该角色拥有的权限了。然后就是在 User 中添加了一个 ReferenceField，这个在 MongoEngine 里面就表示是外引用的意思，我们可以直接通过这个成员变量访问到用户的 Role 的 permission。</p>
+<p>同时，为了保持代码的可维护性，我们将 permission 都写在一个类中，还设置了一个默认的权限，默认为 READ。</p>
+<p>因为我们现在的数据库中还没有 Role 相关的记录，所以我们需要在启动应用的时候进行插入数据，所以我做了这样的一个操作：</p>
+<pre><code># init roles     
+if Role.objects.count() &lt;= 0:  
+    READ_ROLE = Role('READER', Permission.READ)
+    CREATE_ROLE = Role('CREATER', Permission.CREATE)
+    UPDATE_ROLE = Role('UPDATER', Permission.UPDATE)
+    DELETE_ROLE = Role('DELETER', Permission.DELETE)
+    DEFAULT_ROLE = Role('DEFAULT', Permission.DEFAULT)
+
+    READ_ROLE.save()
+    CREATE_ROLE.save()
+    UPDATE_ROLE.save()
+    DELETE_ROLE.save()
+    DEFAULT_ROLE.save()
+else:            
+    READ_ROLE = Role.objects(permission=Permission.READ).first()
+    CREATE_ROLE = Role.objects(permission=Permission.CREATE).first()
+    UPDATE_ROLE = Role.objects(permission=Permission.UPDATE).first()
+    DELETE_ROLE = Role.objects(permission=Permission.DELETE).first()
+    DEFAULT_ROLE = Role.objects(permission=Permission.DEFAULT).first()
+</code></pre>
+<p>虽然这段代码有不严谨的地方，但是作为讲解的话无关大雅，通过这段代码，我们可以保证在下面的代码中我们有五种 Role 的对象，分别对应着增删改查，还有一个默认的角色，他为读取权限。同时，我们也应该修改一下我们的 API，让他能够增加用户的默认权限。</p>
+<pre><code>@app.route('/', methods=['POST'])
+@login_required 
+def create_record():
+    record = json.loads(request.data)
+    user = User(name=record['name'],
+                password=record['password'],
+                email=record['email'],
+                role=DEFAULT_ROLE)
+    user.save() 
+    return jsonify(user.to_json())
+</code></pre>
+<p>这段代码只增加了一行，就是：</p>
+<pre><code>role=DEFAULT_ROLE
+</code></pre>
+<h2 id="_3">权限控制</h2>
+<p>好，到这里算是完成了一半了，我们的角色已经算是有了，然后就是怎么进行权限控制了，我希望权限控制代码能够竟可能得简单，最好是能用装饰器实现，对于一些默认权限就能访问的，我希望不用加权限控制的代码就好了。没有不能实现的需求，只是实现得好坏而已，所以，既然我们都能描述出需求，那么就能够写出满足需求的代码。</p>
+<p>首先，我们是需要编写一个权限控制的<a href="https://liuliqiang.info/python-decorator-description/">装饰器</a>的，我们希望这个<a href="https://liuliqiang.info/python-decorator-description/">装饰器</a>可以很方便得进行权限控制，最好是可以这样：</p>
+<pre><code>@creater_required()
+def create_model():
+    ... ...
+</code></pre>
+<p>或者这样也可以接受：</p>
+<pre><code>@permission_required(CREATE_PERMISSION):
+def create_model():
+    ... ...
+</code></pre>
+<p>那么，就先写一个较为简单的版本试试先：</p>
+<pre><code>def permission_required(permission):
+    def decorator(func):           
+        @wraps(func)               
+        def decorated_function(*args, **kwargs):
+            if not current_user.is_authenticated:
+                abort(401) 
+            user_permission = current_user.role.permission
+            if user_permission &amp; permission == permission:
+                return func(*args, **kwargs)
+            else:                  
+                abort(403)         
+        return decorated_function
+    return decorator
+</code></pre>
+<p>这一版本我们可以简单得看这几句关键的代码：</p>
+<pre><code>if not current_user.is_authenticated:
+    abort(401) 
+user_permission = current_user.role.permission
+if user_permission &amp; permission == permission:
+    return func(*args, **kwargs)
+else:                  
+    abort(403)
+</code></pre>
+<p>首先用户没有登陆肯定是没有权限的了，所以返回 401 未授权错误，如果用户没有权限（权限设计中的描述），那么就返回 403 禁止访问。</p>
+<p>接着我们就在我们的 REST API 中尝试一下这个权限，这里相对新增用户进行尝试：</p>
+<pre><code>@app.route('/', methods=['POST'])
+@permission_required(Permission.CREATE)   
+def create_record():               
+    record = json.loads(request.data) 
+    user = User(name=record['name'],  
+                password=record['password'],
+                email=record['email'],
+                role=DEFAULT_ROLE)  
+    user.save()                     
+    return jsonify(user.to_json()
+</code></pre>
+<p>这里只将 <code>@login_required</code> 的装饰器换成了</p>
+<pre><code>@permission_required(Permission.CREATE)
+</code></pre>
+<p>然后我们尝试一下新建记录：</p>
+<pre><code>POST http://localhost:8080
+
+{
+  "email": "liqianglau@outlook.com",
+  "name": "tyrael",
+  "password": "password"
+}
+</code></pre>
+<p>然后发现响应是：</p>
+<p><img alt="Image-2016-05-26-020312001.png" src="https://ooo.0o0.ooo/2016/05/25/5745ea1c6bd61.png" /></p>
+<p>说明我们的权限控制生效啦。</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter007/" class="btn btn-neutral float-right" title="更好得维护代码">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../chapter005/" class="btn btn-neutral" title="注册登录"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../chapter005/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../chapter007/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

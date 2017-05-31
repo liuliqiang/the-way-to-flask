@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>编写 TODO 应用【part2】 - The Way to Flask</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "\u7f16\u5199 TODO \u5e94\u7528\u3010part2\u3011";
+    var mkdocs_page_input_path = "chapter012.md";
+    var mkdocs_page_url = "/chapter012/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../SUMMARY/" class="icon icon-home"> The Way to Flask</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../SUMMARY/">目录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">前言</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part001/">第一部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter001/">本书概述</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter002/">简单的 Flask 应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter003/">简单的 REST 服务</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part002/">第二部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter004/">集成数据库</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter005/">注册登录</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter006/">权限控制</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter007/">更好得维护代码</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter008/">配置管理</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter009/">启动应用</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter010/">管理数据库数据</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../part003/">第三部分</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter011/">编写 TODO 应用【part1】</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">编写 TODO 应用【part2】</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#todo-part002">编写 TODO 应用【part002】</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#_1">设置配置</a></li>
+        
+            <li><a class="toctree-l3" href="#_2">运行服务器</a></li>
+        
+            <li><a class="toctree-l3" href="#_3">添加用户</a></li>
+        
+            <li><a class="toctree-l3" href="#_4">测试功能：</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chapter013/">使用 Gunicorn 和 Nginx 部署项目</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../SUMMARY/">The Way to Flask</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../SUMMARY/">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>编写 TODO 应用【part2】</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="todo-part002">编写 TODO 应用【part002】</h1>
+<h2 id="_1">设置配置</h2>
+<p>配置的话，我们全放在 config 目录下，并且按环境划分，因为只使用到开发环境，所以就只设置了开发环境的：</p>
+<p>config/<strong>init</strong>.py</p>
+<pre><code>    # coding: UTF-8
+    import os
+
+
+    def load_config(mode=os.environ.get('MODE')):
+        """Load config."""
+        try:
+            if mode == 'PRODUCTION':
+                from .production import ProductionConfig
+                return ProductionConfig
+            elif mode == 'TESTING':
+                from .testing import TestingConfig
+                return TestingConfig
+            else:
+                from .development import DevelopmentConfig
+                return DevelopmentConfig
+        except ImportError:
+            from .default import Config
+            return Config
+
+config/development.py
+
+    # coding: utf-8
+    import os
+
+
+    class DevelopmentConfig(object):
+        """Base config class."""
+        # Flask app config
+        DEBUG = False
+        TESTING = False
+        SECRET_KEY = "sample_key"
+
+        # Root path of project
+        PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
+        # Site domain
+        SITE_TITLE = "twtf"
+        SITE_DOMAIN = "http://localhost:8080"
+
+        # MongoEngine config
+        MONGODB_SETTINGS = {
+            'db': 'the_way_to_flask',
+            'host': '192.168.59.103',
+            'port': 27017
+        }
+
+## 配置运行脚本
+
+到此，我们的应用代码算是写完了，然后就是运行服务器了，还是使用 Flask-Script，所以我们需要配置 manage.py，内容为；
+
+manage.py
+
+#!/usr/bin/env python
+# encoding: utf-8
+from flask_script import Manager
+from flask_script.commands import ShowUrls
+
+from application import create_app
+
+manager = Manager(create_app)
+manager.add_option('-c', '--config', dest='mode', required=False)
+
+manager.add_command("showurls", ShowUrls())
+
+if __name__ == "__main__":
+    manager.run()
+</code></pre>
+<h2 id="_2">运行服务器</h2>
+<pre><code>pyhton manage.py -c development runserver
+</code></pre>
+<p>当你看到以下语句的时候说明你的服务器运行成功了：</p>
+<pre><code>* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+</code></pre>
+<h2 id="_3">添加用户</h2>
+<p>因为现在数据库中是没有用户的，所以我们需要手动添加一个用户先，在管理后台可以添加：</p>
+<pre><code>http://localhost:5000/admin/user/
+</code></pre>
+<p><img alt="" src="../imgs/twtf_chapter012_001.png" />
+<img alt="" src="../imgs/twtf_chapter012_002.png" /></p>
+<h2 id="_4">测试功能：</h2>
+<p>登录：</p>
+<pre><code>POST /auth/login HTTP/1.1
+Host: localhost:5000
+
+{"username": "zhangsan",
+ "password": "password"}
+</code></pre>
+<p>响应应该是：</p>
+<pre><code>{
+  "email": "zhangsan@gmail.com",
+  "name": "zhangsan",
+  "role": "ADMIN"
+}
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../chapter013/" class="btn btn-neutral float-right" title="使用 Gunicorn 和 Nginx 部署项目">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../chapter011/" class="btn btn-neutral" title="编写 TODO 应用【part1】"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../chapter011/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../chapter013/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
