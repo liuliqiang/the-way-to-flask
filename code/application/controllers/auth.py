@@ -3,7 +3,7 @@
 import json
 
 from flask import Blueprint, request, jsonify
-from flask.ext.login import login_user, logout_user
+from flask_login import login_user, logout_user
 
 import application.models as Models
 

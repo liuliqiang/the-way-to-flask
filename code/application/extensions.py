@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 from flask_jwt import JWT
-from flask.ext.admin import Admin
-from flask.ext.login import LoginManager
-from flask.ext.mongoengine import MongoEngine
+from flask_admin import Admin
+from flask_login import LoginManager
+from flask_mongoengine import MongoEngine
 
 
 db = MongoEngine()
